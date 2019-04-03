@@ -15,7 +15,7 @@ import java.net.URL;
  */
 public class URLCatcher {
     public static void main(String[] args) throws IOException {
-        URL url = new URL("http://localhost:8080/");
+        URL url = new URL("http://www.baidu.com");
         BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
         StringBuilder data= new StringBuilder();
         String line;
