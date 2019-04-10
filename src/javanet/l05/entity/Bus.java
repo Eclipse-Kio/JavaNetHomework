@@ -15,26 +15,27 @@ public class Bus extends Thread {
     private int code;
     private Line stops;
     private double currentPosition;
-    private double speed = 0.01;
+    private double speed;
     private boolean flag = true;
 
     public Bus(Line stops) {
         this.code = stops.getCode();
         this.stops = stops;
         this.currentPosition = Math.random() * stops.size();//随机初始位置
+        this.speed = 0.005 + Math.random() * 0.01;
     }
 
     @Override
     public void run() {
         //模拟公交车运行
         while (flag) {
-                currentPosition += speed * Math.random();//模拟公交车非匀速运动
+            currentPosition += (speed + Math.random() * 0.01);//模拟公交车非匀速运动
             if (currentPosition < 0) {
                 currentPosition = 0;
                 speed = -speed;
             }
 
-            if (currentPosition >= stops.size()) {
+            if (currentPosition + 1 > stops.size()) {
                 currentPosition = stops.size() - 1;
                 speed = -speed;
             }

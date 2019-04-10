@@ -98,19 +98,19 @@ public class Client extends Application {
         }
 
         JSONArray stops = dataObject.getJSONObject("msg").getJSONArray("stops");
-        double gap = (context.getCanvas().getWidth() - context.getFont().getSize()) / stops.length();
+        double gap = (context.getCanvas().getWidth() - context.getFont().getSize()) / (stops.length()-1);
         for (int i = 0; i < stops.length(); i++) {
             StringBuilder raw = new StringBuilder(stops.getString(i));
             for (int j = 0; j < raw.toString().length(); j++) {
                 raw.insert(j, "\n");
                 j++;
             }
-            context.fillText(raw.toString(), i * gap + context.getFont().getSize() * 1.5, 180);
+            context.fillText(raw.toString(), i * gap + context.getFont().getSize() * 0.5, 180);
         }
         JSONArray buses = dataObject.getJSONArray("busPosition");
 
         for (int i = 0; i < buses.length(); i++) {
-            double absolutePosition = gap * buses.getDouble(i);
+            double absolutePosition = gap * buses.getDouble(i)+ context.getFont().getSize() * 0.5 - 15;
             context.setFill(paints[i % paints.length]);
             context.fillOval(absolutePosition, 145, 30, 30);
         }
@@ -133,7 +133,7 @@ public class Client extends Application {
         operation.getChildren().add(search);
 
         main.getChildren().add(operation);
-        Scene scene = new Scene(main, 1200, 900);
+        Scene scene = new Scene(main, 1200, 800);
         primaryStage.setScene(scene);
         primaryStage.setTitle("公交车实时到站查询系统  -233");
         primaryStage.show();
@@ -154,7 +154,7 @@ public class Client extends Application {
         });
 
         Canvas canvas = new Canvas();
-        canvas.setHeight(860);
+        canvas.setHeight(750);
         canvas.setWidth(1190);
         context = canvas.getGraphicsContext2D();
         context.setTextAlign(TextAlignment.CENTER);
