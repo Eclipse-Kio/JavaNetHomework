@@ -1,7 +1,5 @@
 package javanet.e04;
 
-import javanet.l04.Server;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
