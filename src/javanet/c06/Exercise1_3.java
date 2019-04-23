@@ -57,8 +57,13 @@ public class Exercise1_3 {
 
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.DECRYPT_MODE,privateKey);
-        byte[] result = cipher.doFinal(encryptedBytes);
-        return new String(result);
+        try {
+            byte[] result = cipher.doFinal(encryptedBytes);
+            return new String(result);
+        }catch (Exception e){
+            System.out.println("无法解析！");
+            return null;
+        }
     }
 
 
